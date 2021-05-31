@@ -8,6 +8,7 @@ Route::prefix('admin')->group(function() {
      /**
      * Routes Permissions X Profile
      */
+    Route::get('profiles/{id}permission/{idPermission}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@detachPermissionProfile')->name('profiles.permission.detach');
     Route::post('profiles/{id}permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
     Route::any('profiles/{id}permissions/create', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     Route::get('profiles/{id}permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissions')->name('profiles.permissions');
