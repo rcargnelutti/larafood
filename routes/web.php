@@ -12,6 +12,7 @@ Route::prefix('admin')->group(function() {
     Route::post('profiles/{id}permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
     Route::any('profiles/{id}permissions/create', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     Route::get('profiles/{id}permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissions')->name('profiles.permissions');
+    Route::get('permissions/{id}/profile', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@profiles')->name('permissions.profiles');
 
 
     /**
