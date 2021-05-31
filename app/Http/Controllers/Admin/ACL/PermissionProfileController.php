@@ -29,16 +29,18 @@ class PermissionProfileController extends Controller
         return view('admin.pages.profiles.permissions.permissions', compact('profile', 'permissions'));
     }
 
-    public function permissionsAvailable($idPerfil)
+    public function permissionsAvailable(Request $request, $idPerfil)
     {
         if (!$profile = $this->profile->find($idPerfil)){
             return redirect()->back();
         }
 
-        //$permissions = $this->permission->paginate();
-        $permissions = $profile->permissionsAvailable();
+        $filters = $request->except('_token');
 
-        return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions'));
+        //$permissions = $this->permission->paginate();
+        $permissions = $profile->permissionsAvailable($request->filter);
+
+        return view('admin.pages.profiles.permissions.available', compact('profile', 'permissions','filters'));
 
     }
 
