@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Tempo de geração: 31/05/2021 às 04:52
+-- Tempo de geração: 02/06/2021 às 04:55
 -- Versão do servidor: 8.0.23
 -- Versão do PHP: 7.4.16
 
@@ -84,7 +84,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2021_05_26_231844_create_detail_plans_table', 2),
 (7, '2021_05_28_232157_create_profiles_table', 3),
 (8, '2021_05_29_020726_create_permissions_table', 4),
-(9, '2021_05_29_150425_create_permission_profile_table', 5);
+(9, '2021_05_29_150425_create_permission_profile_table', 5),
+(10, '2021_06_01_011639_create_plan_profile_table', 6);
 
 -- --------------------------------------------------------
 
@@ -139,10 +140,14 @@ CREATE TABLE `permission_profile` (
 --
 
 INSERT INTO `permission_profile` (`id`, `permission_id`, `profile_id`) VALUES
-(1, 1, 1),
-(3, 4, 1),
-(4, 5, 1),
-(5, 6, 1);
+(6, 6, 1),
+(7, 4, 1),
+(8, 1, 1),
+(9, 5, 1),
+(10, 1, 2),
+(11, 4, 2),
+(12, 5, 2),
+(13, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -188,6 +193,29 @@ INSERT INTO `plans` (`id`, `name`, `url`, `price`, `description`, `created_at`, 
 (28, 'Plano de teste 2', 'plano-de-teste2', 12.12, 'Apenas um teste', '2021-05-26 20:53:28', '2021-05-26 20:54:36'),
 (29, 'MIX 2000', 'm-i-x2000', 219.19, 'MIX 2000 tem uma variedades de canais', '2021-05-26 22:30:28', '2021-05-26 22:30:53'),
 (30, 'Bootstrap update', 'bootstrap-update', 9999.99, 'Bootstrap 5 update', '2021-05-29 15:38:56', '2021-05-29 15:39:51');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `plan_profile`
+--
+
+CREATE TABLE `plan_profile` (
+  `id` bigint UNSIGNED NOT NULL,
+  `plan_id` bigint UNSIGNED NOT NULL,
+  `profile_id` bigint UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `plan_profile`
+--
+
+INSERT INTO `plan_profile` (`id`, `plan_id`, `profile_id`) VALUES
+(1, 29, 1),
+(2, 29, 2),
+(3, 28, 1),
+(4, 28, 2),
+(5, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -282,6 +310,14 @@ ALTER TABLE `plans`
   ADD UNIQUE KEY `plans_url_unique` (`url`);
 
 --
+-- Índices de tabela `plan_profile`
+--
+ALTER TABLE `plan_profile`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `plan_profile_plan_id_foreign` (`plan_id`),
+  ADD KEY `plan_profile_profile_id_foreign` (`profile_id`);
+
+--
 -- Índices de tabela `profiles`
 --
 ALTER TABLE `profiles`
@@ -314,7 +350,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de tabela `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `permissions`
@@ -326,13 +362,19 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de tabela `permission_profile`
 --
 ALTER TABLE `permission_profile`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `plans`
 --
 ALTER TABLE `plans`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT de tabela `plan_profile`
+--
+ALTER TABLE `plan_profile`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `profiles`
@@ -362,6 +404,13 @@ ALTER TABLE `detail_plans`
 ALTER TABLE `permission_profile`
   ADD CONSTRAINT `permission_profile_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `permission_profile_profile_id_foreign` FOREIGN KEY (`profile_id`) REFERENCES `profiles` (`id`) ON DELETE CASCADE;
+
+--
+-- Restrições para tabelas `plan_profile`
+--
+ALTER TABLE `plan_profile`
+  ADD CONSTRAINT `plan_profile_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `plan_profile_profile_id_foreign` FOREIGN KEY (`profile_id`) REFERENCES `profiles` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

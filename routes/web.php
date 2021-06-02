@@ -4,14 +4,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function() {
 
+    /**
+     * Routes Plan X Profile
+     */
+    Route::get('plans/{id}/profile/{idprofile}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@detachProfilePlan')->name('plans.profile.detach');
+    Route::post('plans/{id}/profiles', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@attachProfilePlan')->name('plans.profiles.attach');
+    Route::any('plans/{id}/profiles/create', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@profilesAvailable')->name('plans.profiles.available');
+    Route::get('plans/{id}/profiles', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@profiles')->name('plans.profiles');
+    Route::get('profiles/{id}/plans', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@plans')->name('profiles.plans');
 
      /**
-     * Routes Permissions X Profile
+     * Routes Permission X Profile
      */
-    Route::get('profiles/{id}permission/{idPermission}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@detachPermissionProfile')->name('profiles.permission.detach');
-    Route::post('profiles/{id}permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
-    Route::any('profiles/{id}permissions/create', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
-    Route::get('profiles/{id}permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissions')->name('profiles.permissions');
+    Route::get('profiles/{id}/permission/{idPermission}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@detachPermissionProfile')->name('profiles.permission.detach');
+    Route::post('profiles/{id}/permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
+    Route::any('profiles/{id}/permissions/create', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
+    Route::get('profiles/{id}/permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@permissions')->name('profiles.permissions');
     Route::get('permissions/{id}/profile', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionProfileController@profiles')->name('permissions.profiles');
 
 
