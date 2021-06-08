@@ -80,6 +80,8 @@ Route::get('/', function () {
     return view('admin.pages.plans.create');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/', 'App\\Http\\Controllers\\Site\\SiteController@index')->name('site.home');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
