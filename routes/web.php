@@ -70,17 +70,23 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
 });
 
+
 /**
  * Auth Routes
  */
-
 
 Route::get('/', function () {
     //return view('dashboard');
     return view('admin.pages.plans.create');
 })->middleware(['auth'])->name('dashboard');
 
+/**
+ * Site
+ */
+Route::get('/register/{url}', 'App\\Http\\Controllers\\Site\\SiteController@plan')->name('plan.subscription');
 Route::get('/', 'App\\Http\\Controllers\\Site\\SiteController@index')->name('site.home');
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');
