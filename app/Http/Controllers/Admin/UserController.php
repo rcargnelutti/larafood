@@ -23,7 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->reposiroty->paginate();
+        // $users = $this->reposiroty->paginate();
+        $users = $this->reposiroty::with('tenant')->paginate(5);
         return view('admin.pages.users.index', compact('users'));
     }
 
