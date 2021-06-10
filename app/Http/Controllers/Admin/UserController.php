@@ -50,7 +50,7 @@ class UserController extends Controller
         $data = $request->all();
 
         $data['tenant_id'] =  Auth::user()->tenant_id;
-
+        $data['password'] = bcrypt($data['password']); //encrypt password
 
         $this->reposiroty->create($data);
 
@@ -97,7 +97,13 @@ class UserController extends Controller
         if (!$user = $this->reposiroty->find($id)){
             return redirect()->back();
         }
-        $user->update($request->all());
+
+        $data = $request->only(['name', 'email']);
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
         return redirect()->route('users.index');
     }
 
