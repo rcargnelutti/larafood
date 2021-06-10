@@ -12,9 +12,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
      * Routes Users
      */
     Route::any('users/search', 'App\\Http\\Controllers\\Admin\\UserController@search')->name('users.search');
-    // Route::get('users/{id}', 'App\\Http\\Controllers\\Admin\\UserController@show')->name('users.show');
-    // Route::get('users/{id}/edit', 'App\\Http\\Controllers\\Admin\\UserController@edit')->name('users.edit');
-    // Route::get('users', 'App\\Http\\Controllers\\Admin\\UserController@index')->name('users.index');
     Route::resource('users', 'App\\Http\\Controllers\\Admin\\UserController');
 
     /**
