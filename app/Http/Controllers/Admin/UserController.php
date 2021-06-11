@@ -23,8 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $users = $this->reposiroty->paginate();
-        $users = $this->reposiroty::with('tenant')->paginate(5);
+        $users = $this->reposiroty->latest()->TenantUser()->paginate();
+        //$users = $this->reposiroty::with('tenant')->latest()->TenantUser()->paginate();
         return view('admin.pages.users.index', compact('users'));
     }
 
@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (!$user = $this->reposiroty->find($id)){
+        if (!$user = $this->reposiroty->TenantUser()->find($id)){
             return redirect()->back();
         }
         return view('admin.pages.users.show', compact('user'));
@@ -79,7 +79,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (!$user = $this->reposiroty->find($id)){
+        if (!$user = $this->reposiroty->TenantUser()->find($id)){
             return redirect()->back();
         }
         return view('admin.pages.users.edit', compact('user'));
@@ -94,7 +94,7 @@ class UserController extends Controller
      */
     public function update(StoreUpdateUser $request, $id)
     {
-        if (!$user = $this->reposiroty->find($id)){
+        if (!$user = $this->reposiroty->TenantUser()->find($id)){
             return redirect()->back();
         }
 
@@ -115,7 +115,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if (!$user = $this->reposiroty->find($id)){
+        if (!$user = $this->reposiroty->TenantUser()->find($id)){
             return redirect()->back();
         }
         $user->delete();
@@ -138,6 +138,8 @@ class UserController extends Controller
                                     $query->orWhere('email', $request->filter);
                                 }
                             })
+                            ->latest()
+                            ->TenantUser()
                             ->paginate();
         return view('admin.pages.users.index', compact('users', 'filters'));
     }
