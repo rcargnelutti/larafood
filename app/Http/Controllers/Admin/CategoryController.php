@@ -92,20 +92,26 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param App\Http\Requests\StoreUpdateCategory  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateCategory $request, $id)
     {
-        $category = $this->repository->where('id', $id)->first();
-        if (!$category)
+        // $category = $this->repository->where('id', $id)->first();
+        // if (!$category)
+        //     return redirect()->back();
+
+        // $data = $request->all();
+        // $data['url'] = Str::kebab($request->name);
+
+        // $category->update($data);
+
+        if (!$category = $this->repository->find($id)){
             return redirect()->back();
+        }
 
-        $data = $request->all();
-        $data['url'] = Str::kebab($request->name);
-
-        $category->update($data);
+        $category->update($request->all());
 
         return redirect()->route('categories.index');
     }

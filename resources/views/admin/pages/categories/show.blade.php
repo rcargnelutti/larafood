@@ -17,10 +17,10 @@
                     <strong>Nome: </strong> {{ $category->name }}
                 </li>
                 <li>
-                    <strong>Descrição: </strong> {{ $category->description }}
+                    <strong>URL: </strong> {{ $category->url }}
                 </li>
                 <li>
-                    <strong>URL: </strong> {{ $category->url }}
+                    <strong>Descrição: </strong> {{ $category->description }}
                 </li>
             </ul>
 
