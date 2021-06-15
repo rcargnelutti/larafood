@@ -18,4 +18,5 @@ trait TenantTrait
 
         static::addGlobalScope(new TenantScope);
     }
+
 }

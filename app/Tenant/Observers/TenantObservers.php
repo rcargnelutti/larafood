@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class TenantObservers
 {
     /**
-     * Handle the XXX event.
+     * Handle the Tenant "creating" event.
      *
      * @param  \Illuminate\Database\Eloquent\Model $model
      * @return void
