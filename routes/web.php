@@ -8,6 +8,18 @@ use App\Http\Controllers\Admin\{
 Route::middleware(['auth'])->prefix('admin')->group(function() {
 
     /**
+     * Routes Categories
+     */
+    Route::any('categories/search', 'App\\Http\\Controllers\\Admin\\CategoryController@search')->name('categories.search');
+    Route::resource('categories', 'App\\Http\\Controllers\\Admin\\CategoryController');
+
+    /**
+     * Routes Users
+     */
+    Route::any('users/search', 'App\\Http\\Controllers\\Admin\\UserController@search')->name('users.search');
+    Route::resource('users', 'App\\Http\\Controllers\\Admin\\UserController');
+
+    /**
      * Routes Plan X Profile
      */
     Route::get('plans/{id}/profile/{idprofile}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PlanProfileController@detachProfilePlan')->name('plans.profile.detach');
