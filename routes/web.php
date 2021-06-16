@@ -8,6 +8,15 @@ use App\Http\Controllers\Admin\{
 Route::middleware(['auth'])->prefix('admin')->group(function() {
 
     /**
+     * Routes Product X category
+     */
+    Route::get('products/{id}/category/{idCategory}/detach', 'App\\Http\\Controllers\\Admin\\CategoryProductController@detachCategoryProduct')->name('products.category.detach');
+    Route::post('products/{id}/categories', 'App\\Http\\Controllers\\Admin\\CategoryProductController@attachCategoriesProduct')->name('products.categories.attach');
+    Route::any('products/{id}/categories/create', 'App\\Http\\Controllers\\Admin\\CategoryProductController@categoriesAvailable')->name('products.categories.available');
+    Route::get('products/{id}/categories', 'App\\Http\\Controllers\\Admin\\CategoryProductController@categories')->name('products.categories');
+    Route::get('categories/{id}/products', 'App\\Http\\Controllers\\Admin\\CategoryProductController@products')->name('categories.products');
+
+    /**
      * Routes Products
      */
     Route::any('products/search', 'App\\Http\\Controllers\\Admin\\ProductController@search')->name('products.search');
