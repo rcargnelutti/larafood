@@ -8,6 +8,13 @@ use App\Http\Controllers\Admin\{
 Route::middleware(['auth'])->prefix('admin')->group(function() {
 
     /**
+     * Routes Products
+     */
+    Route::any('products/search', 'App\\Http\\Controllers\\Admin\\ProductController@search')->name('products.search');
+    Route::resource('products', 'App\\Http\\Controllers\\Admin\\ProductController');
+
+
+    /**
      * Routes Categories
      */
     Route::any('categories/search', 'App\\Http\\Controllers\\Admin\\CategoryController@search')->name('categories.search');
