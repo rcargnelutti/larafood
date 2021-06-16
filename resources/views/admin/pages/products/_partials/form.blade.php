@@ -1,16 +1,20 @@
 @include('admin.includes.alerts')
 
 <div class="form-group">
-    <label>Nome:</label>
-    <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $category->name ?? old('name') }}">
+    <label>* Título:</label>
+    <input type="text" name="title" class="form-control" placeholder="Título:" value="{{ $product->title ?? old('title') }}">
 </div>
-{{-- <div class="form-group">
-    <label>Descrição</label>
-    <input type="text" name="description" class="form-control" placeholder="Descrição:" value="{{ $category->description ?? old('description') }}">
-</div> --}}
 <div class="form-group">
-    <label>Descrição</label>
-    <textarea name="description" cols="30" rows="5" class="form-control">{{ $category->description ?? old('description') }}</textarea>
+    <label>* Preço:</label>
+    <input type="text" name="price" class="form-control" placeholder="Preço:" value="{{ $product->price ?? old('price') }}">
+</div>
+<div class="form-group">
+    <label>Imagem:</label>
+    <input type="file" name="image" class="form-control">
+</div>
+<div class="form-group">
+    <label>* Descrição</label>
+    <textarea name="description" cols="30" rows="5" class="form-control">{{ $product->description ?? old('description') }}</textarea>
 </div>
 <div class="form-group">
     <button type="submit" class="btn btn-dark">Salvar</button>

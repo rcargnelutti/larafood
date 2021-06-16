@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Auth;
-//use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -49,13 +49,13 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
-        $tenant =  Auth ::user()->tenant;
+        $tenant =  Auth::user()->tenant;
 
         if($request->hasFile('image') && $request->image->isValid()){
-            $data['image'] = $request->image->store("tenants/{$tenant->uuid}/products");
+            $data['image'] = $request->image->store("tenants/{$tenant->id}/products");
         }
 
-        $this->repository->create($request->all());
+        $this->repository->create($data);
         return redirect()->route('products.index');
     }
 
@@ -102,13 +102,16 @@ class ProductController extends Controller
 
         $data = $request->all();
 
-        $tenant =  Auth ::user()->tenant;
+        $tenant =  Auth::user()->tenant;
 
         if($request->hasFile('image') && $request->image->isValid()){
-            $data['image'] = $request->image->store("tenants/{$tenant->uuid}/products");
+            if (Storage::exists($product->image)){
+                Storage::delete($product->image);
+            }
+            $data['image'] = $request->image->store("tenants/{$tenant->id}/products");
         }
 
-        $product->update();
+        $product->update($data);
         return redirect()->route('products.index');
     }
 
@@ -123,6 +126,11 @@ class ProductController extends Controller
         if (!$product = $this->repository->find($id)){
             return redirect()->back();
         }
+
+        if (Storage::exists($product->image)){
+            Storage::delete($product->image);
+        }
+
         $product->delete();
         return redirect()->route('products.index');
     }

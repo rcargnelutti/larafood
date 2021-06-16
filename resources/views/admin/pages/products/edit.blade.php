@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', "Editar a categoria - {$category->name}")
+@section('title', "Editar o Produto - {$product->name}")
 
 @section('content_header')
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('categories.index') }}" class="active">Voltar</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('products.index') }}" class="active">Voltar</a></li>
     </ol>
-    <h1>Detalhes da categoria <b>{{ $category->name }}</b></h1>
+    <h1>Detalhes do Produto<b>{{ $product->name }}</b></h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('categories.update', $category->id) }}" class="form" method="POST">
+            <form action="{{ route('products.update', $product->id) }}" class="form" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                @include('admin.pages.categories._partials.form')
+                @include('admin.pages.products._partials.form')
             </form>
         </div>
     </div>
