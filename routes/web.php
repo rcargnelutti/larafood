@@ -8,6 +8,12 @@ use App\Http\Controllers\Admin\{
 Route::middleware(['auth'])->prefix('admin')->group(function() {
 
     /**
+     * Routes Tables
+     */
+    Route::any('tables/search', 'App\\Http\\Controllers\\Admin\\TableController@search')->name('tables.search');
+    Route::resource('tables', 'App\\Http\\Controllers\\Admin\\TableController');
+
+    /**
      * Routes Product X category
      */
     Route::get('products/{id}/category/{idCategory}/detach', 'App\\Http\\Controllers\\Admin\\CategoryProductController@detachCategoryProduct')->name('products.category.detach');
