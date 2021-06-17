@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateCategory;
-use App\Models\Category;
+use App\Http\Requests\StoreUpdateTable;
+use App\Models\Table;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class TableController extends Controller
 {
     protected $repository;
 
-    public function __construct(Category $category)
+    public function __construct(Table $table)
     {
-        $this->repository = $category;
+        $this->repository = $table;
     }
 
     /**
@@ -25,9 +25,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->repository->latest()->paginate();
+        $tables = $this->repository->latest()->paginate();
 
-        return view('admin.pages.categories.index', compact('categories'));
+        return view('admin.pages.tables.index', compact('tables'));
     }
 
     /**
@@ -37,28 +37,28 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.categories.create');
+        return view('admin.pages.tables.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\StoreUpdateCategory  $request
+     * @param  App\Http\Requests\StoreUpdateTable  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateCategory $request)
+    public function store(StoreUpdateTable $request)
     {
 
         $this->repository->create($request->all());
 
-        // IMPLEMENTADO Str::kebab($request->name); NA CategoryObserver.php
+        // IMPLEMENTADO Str::kebab($request->name); NA TableObserver.php
         // $data = $request->all();
         // $data['url'] = Str::kebab($request->name);
         // $data['tenant_id'] =  Auth ::user()->tenant_id;
 
         // $this->repository->create($data);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('tables.index');
     }
 
     /**
@@ -69,10 +69,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        if (!$category = $this->repository->find($id)){
+        if (!$table = $this->repository->find($id)){
             return redirect()->back();
         }
-        return view('admin.pages.categories.show', compact('category'));
+        return view('admin.pages.tables.show', compact('table'));
     }
 
     /**
@@ -83,37 +83,37 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        if (!$category = $this->repository->find($id)){
+        if (!$table = $this->repository->find($id)){
             return redirect()->back();
         }
-        return view('admin.pages.categories.edit', compact('category'));
+        return view('admin.pages.tables.edit', compact('table'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param App\Http\Requests\StoreUpdateCategory  $request
+     * @param App\Http\Requests\StoreUpdateTable  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateCategory $request, $id)
+    public function update(StoreUpdateTable $request, $id)
     {
-        // $category = $this->repository->where('id', $id)->first();
-        // if (!$category)
+        // $table = $this->repository->where('id', $id)->first();
+        // if (!$table)
         //     return redirect()->back();
 
         // $data = $request->all();
         // $data['url'] = Str::kebab($request->name);
 
-        // $category->update($data);
+        // $table->update($data);
 
-        if (!$category = $this->repository->find($id)){
+        if (!$table = $this->repository->find($id)){
             return redirect()->back();
         }
 
-        $category->update($request->all());
+        $table->update($request->all());
 
-        return redirect()->route('categories.index');
+        return redirect()->route('tables.index');
     }
 
     /**
@@ -124,25 +124,25 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        if (!$category = $this->repository->find($id)){
+        if (!$table = $this->repository->find($id)){
             return redirect()->back();
         }
-        $category->delete();
-        return redirect()->route('categories.index');
+        $table->delete();
+        return redirect()->route('tables.index');
     }
 
     public function search(Request  $request)
     {
         $filters = $request->only('filter');
-        $categories = $this->repository
+        $tables = $this->repository
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
-                                    $query->orwhere('name', 'LIKE', "%{$request->filter}%");
+                                    $query->orwhere('identify', 'LIKE', "%{$request->filter}%");
                                     $query->orwhere('description', 'LIKE', "%{$request->filter}%");
                                 }
                             })
                             ->latest()
                             ->paginate();
-        return view('admin.pages.categories.index', compact('categories', 'filters'));
+        return view('admin.pages.tables.index', compact('tables', 'filters'));
     }
 }
