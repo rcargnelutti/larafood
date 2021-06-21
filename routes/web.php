@@ -16,6 +16,12 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     });
 
     /**
+     * Routes Tenants
+     */
+    Route::any('tenants/search', 'App\\Http\\Controllers\\Admin\\TenantController@search')->name('tenants.search');
+    Route::resource('tenants', 'App\\Http\\Controllers\\Admin\\TenantController');
+
+    /**
      * Routes Tables
      */
     Route::any('tables/search', 'App\\Http\\Controllers\\Admin\\TableController@search')->name('tables.search');
