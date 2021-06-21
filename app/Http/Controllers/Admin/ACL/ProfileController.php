@@ -14,6 +14,8 @@ class ProfileController extends Controller
     public function __construct(Profile $profile)
     {
         $this->reposiroty = $profile;
+
+        $this->middleware(['can:profiles']);
     }
     /**
      * Display a listing of the resource.

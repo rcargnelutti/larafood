@@ -14,6 +14,8 @@ class PermissionController extends Controller
     public function __construct(Permission $permission)
     {
         $this->reposiroty = $permission;
+
+        $this->middleware(['can:permissions']);
     }
     /**
      * Display a listing of the resource.

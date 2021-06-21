@@ -4,8 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     PlanController
 };
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
+
+
+    Route::get('test-acl', function(){
+        dd( Auth::user()->permissions());
+        //dd( Auth::user()->isAdmin());
+        //dd( Auth::user()->hasPermission('Permi01'));
+    });
 
     /**
      * Routes Tables
