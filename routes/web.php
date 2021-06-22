@@ -11,8 +11,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
 
     Route::get('test-acl', function(){
         dd( Auth::user()->permissions());
-        //dd( Auth::user()->isAdmin());
-        //dd( Auth::user()->hasPermission('Permi01'));
+        //dd( Auth::user());
+        //( Auth::user()->isAdmin());
+        //dd( Auth::user()->hasPermission('Perm Users'));
     });
 
     /**

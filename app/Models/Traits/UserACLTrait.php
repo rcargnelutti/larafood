@@ -6,8 +6,10 @@ trait UserACLTrait
 {
     public function permissions(): array
     {
-        $tenant = $this->tenant()->first();
+        $tenant = $this->tenant;
+        //dd($tenant);
         $plan = $tenant->plan;
+        //dd($plan);
 
         $permissions = [];
         foreach ($plan->profiles as $profile) {
@@ -15,7 +17,7 @@ trait UserACLTrait
                 array_push($permissions, $permission->name);
             }
         }
-        
+
         return $permissions;
     }
 
