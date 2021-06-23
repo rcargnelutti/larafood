@@ -24,7 +24,9 @@ trait UserACLTrait
 
     public function permissions(): array
     {
+        //dd($this->permissionsPlan());
         $permissionsPlan = $this->permissionsPlan();
+        //dd($this->permissionsRole());
         $permissionsRole = $this->permissionsRole();
 
         $permissions = [];
@@ -32,6 +34,7 @@ trait UserACLTrait
             if (in_array($permission, $permissionsPlan))
                 array_push($permissions, $permission);
         }
+        //dd($permissions);
         return $permissions;
     }
 
@@ -54,13 +57,14 @@ trait UserACLTrait
     public function permissionsRole(): array
     {
         $roles = $this->roles()->with('permissions')->get();
-
+        dd($roles);
         $permissions = [];
         foreach ($roles as $role) {
             foreach ($role->permissions as $permission) {
                 array_push($permissions, $permission->name);
             }
         }
+
         return $permissions;
     }
 
