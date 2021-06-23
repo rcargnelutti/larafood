@@ -11,18 +11,39 @@ class Role extends Model
     protected $fillable = ['name', 'description'];
 
     /**
-     * Get Profiles
+     * Get Permissions
      */
-    public function profiles()
+    public function permissions()
     {
-        return $this->belongsToMany(Profil::class);
+        return $this->belongsToMany(Permission::class);
     }
 
     /**
-     * Get Roles
+     * Get Users
      */
-    public function roles()
+    public function users()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Permission not linked with this profile
+     */
+    public function permissionsAvailable($filter = null)
+    {
+        $permissions = Permission::whereNotIN('permissions.id', function($query){
+            $query->select('permission_role.permission_id');
+            $query->from('permission_role');
+            $query->whereRaw("permission_role.role_id={$this->id}");
+        })// where para o filtro
+        ->where(function($queryFilter) use($filter){
+            if ($filter)
+                $queryFilter->where('permissions.name', 'LIKE', "%$filter%");
+        })
+        ->paginate();
+        //->toSql();
+        //dd($permissions);
+
+        return $permissions;
     }
 }
