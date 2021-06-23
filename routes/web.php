@@ -17,6 +17,31 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     });
 
     /**
+     * Routes Role X User
+     */
+    Route::get('users/{id}/role/{idrole}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\RoleUserController@detachRoleUser')->name('users.role.detach');
+    Route::post('users/{id}/roles', 'App\\Http\\Controllers\\Admin\\ACL\\RoleUserController@attachRolesUser')->name('users.roles.attach');
+    Route::any('users/{id}/roles/create', 'App\\Http\\Controllers\\Admin\\ACL\\RoleUserController@rolesAvailable')->name('users.roles.available');
+    Route::get('users/{id}/roles', 'App\\Http\\Controllers\\Admin\\ACL\\RoleUserController@roles')->name('users.roles');
+    Route::get('roles/{id}/users', 'App\\Http\\Controllers\\Admin\\ACL\\RoleUserController@users')->name('roles.users');
+
+
+     /**
+     * Routes Permission X Role
+     */
+    Route::get('roles/{id}/permission/{idPermission}/detach', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionRoleController@detachPermissionRole')->name('roles.permission.detach');
+    Route::post('roles/{id}/permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionRoleController@attachPermissionsRole')->name('roles.permissions.attach');
+    Route::any('roles/{id}/permissions/create', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionRoleController@permissionsAvailable')->name('roles.permissions.available');
+    Route::get('roles/{id}/permissions', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionRoleController@permissions')->name('roles.permissions');
+    Route::get('permissions/{id}/role', 'App\\Http\\Controllers\\Admin\\ACL\\PermissionRoleController@roles')->name('permissions.roles');
+
+    /**
+     * Routes Roles
+     */
+    Route::any('roles/search', 'App\\Http\\Controllers\\Admin\\ACL\\RoleController@search')->name('roles.search');
+    Route::resource('roles', 'App\\Http\\Controllers\\Admin\\ACL\\RoleController');
+
+    /**
      * Routes Tenants
      */
     Route::any('tenants/search', 'App\\Http\\Controllers\\Admin\\TenantController@search')->name('tenants.search');

@@ -17,7 +17,7 @@
                     <img src="{{ url("storage/{$tenant->logo}") }}" alt="{{ $tenant->name }}" style="max-width: 90px;">
                 </li>
                 <li>
-                    <strong>Plano: </strong> {{--{{ $tenant->plan->name }} --}}
+                    <strong>Plano: </strong> {{ $tenant->plan->name }}
                 </li>
                 <li>
                     <strong>Nome: </strong> {{ $tenant->name }}

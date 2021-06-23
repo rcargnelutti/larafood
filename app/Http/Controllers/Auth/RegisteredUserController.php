@@ -7,6 +7,7 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Models\Tenant;
 use App\Providers\RouteServiceProvider;
+use App\Tenant\Events\TenantCreated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +99,8 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        event(new TenantCreated($user));
 
         Auth::login($user);
 
