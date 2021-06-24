@@ -9,7 +9,7 @@ class TenantRepository implements TenantRepositoryInterface
 {
     protected $entity;
 
-    public function __constructor(Tenant $tenant)
+    public function __construct(Tenant $tenant)
     {
         $this->entity = $tenant;
     }
