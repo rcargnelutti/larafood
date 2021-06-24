@@ -57,7 +57,7 @@ trait UserACLTrait
     public function permissionsRole(): array
     {
         $roles = $this->roles()->with('permissions')->get();
-        dd($roles);
+        //dd($roles);
         $permissions = [];
         foreach ($roles as $role) {
             foreach ($role->permissions as $permission) {
