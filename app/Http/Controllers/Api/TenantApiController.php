@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TenantResource;
+use App\Models\Tenant;
 use App\Services\TenantService;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,7 @@ class TenantApiController extends Controller
     {
         //dd('chegou na index');
         $per_page = (int) $request->get('per_page', 15);
-        return $this->tenantService->getAllTenants($per_page);
+        return TenantResource::collection($this->tenantService->getAllTenants($per_page));
     }
 
 }
