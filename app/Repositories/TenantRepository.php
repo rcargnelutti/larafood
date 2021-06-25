@@ -21,5 +21,10 @@ class TenantRepository implements TenantRepositoryInterface
         //dd($y);
     }
 
+    public function getTenantById(string $id)
+    {
+        return $this->entity->where('id', $id)->first();
+    }
+
 
 }

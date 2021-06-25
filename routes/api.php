@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/tenants/{id}', 'App\\Http\\Controllers\\Api\\TenantApiController@show');
 Route::get('/tenants', 'App\\Http\\Controllers\\Api\\TenantApiController@index');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

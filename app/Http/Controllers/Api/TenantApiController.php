@@ -24,4 +24,10 @@ class TenantApiController extends Controller
         return TenantResource::collection($this->tenantService->getAllTenants($per_page));
     }
 
+    public function show($id)
+    {
+        $tenant = $this->tenantService->getTenantById($id);
+        return new TenantResource($tenant);
+    }
+
 }

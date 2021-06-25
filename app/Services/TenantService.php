@@ -23,9 +23,10 @@ class TenantService
         //dd($x);
     }
 
-    public function getTenantByUuid(string $uuid)
+    public function getTenantById(string $id)
     {
-        return $this->repository->getTenantByUuid($uuid);
+        return $this->repository->getTenantById($id);
+
     }
 
     public function make(Plan $plan, array $data)

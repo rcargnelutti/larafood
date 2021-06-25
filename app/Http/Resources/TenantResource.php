@@ -32,6 +32,7 @@ class TenantResource extends JsonResource
             'subscription_active_boolean' => $this->subscription_active == 0?false:true,
             'subscription_suspended' => $this->subscription_suspended,
             'created_at' => $this->created_at->format('d/m/Y'),
+            'image' => $this->logo ? url("storage/{$this->logo}") : '',
             //'updated_at' => $this->updated_at,
         ];
     }
