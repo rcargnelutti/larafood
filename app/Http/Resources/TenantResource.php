@@ -20,7 +20,6 @@ class TenantResource extends JsonResource
             'id' => $this->id,
             'plan_id' => $this->plan_id,
             'cnpj' => $this->cnpj,
-            'name' => $this->name,
             'url' => $this->url,
             'email' => $this->email,
             'logo' => $this->logo,
