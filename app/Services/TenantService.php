@@ -17,10 +17,7 @@ class TenantService
 
     public function getAllTenants(int $per_page)
     {
-        //dd('TESTE - getAllTenants');
         return $this->repository->getAllTenants($per_page);
-        //$x = $this->repository->getAllTenants($per_page);
-        //dd($x);
     }
 
     public function getTenantById(string $id)

@@ -21,12 +21,18 @@ class TenantApiController extends Controller
     {
         //dd('chegou na index');
         $per_page = (int) $request->get('per_page', 15);
-        return TenantResource::collection($this->tenantService->getAllTenants($per_page));
+
+        $tenant = $this->tenantService->getAllTenants($per_page);
+
+        return TenantResource::collection($tenant);
     }
 
     public function show($id)
     {
-        $tenant = $this->tenantService->getTenantById($id);
+        if (!$tenant = $this->tenantService->getTenantById($id)) {
+            return response()->json(['message' => 'Tenant Not Found'], 404);
+        }
+
         return new TenantResource($tenant);
     }
 
