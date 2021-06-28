@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories\Contracts;
-
 interface TableRepositoryInterface
 {
     public function getTablesByTenantId(string $id);
