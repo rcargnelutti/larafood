@@ -14,7 +14,7 @@ class ProductRepository implements ProductRepositoryInterface
         $this->table = 'products';
     }
 
-    public function getProductsByTenantId(int $idTenant)
+    public function getProductsByTenantId(string $idTenant)
     {
         return DB::table($this->table)
                     ->where('tenant_id', $idTenant)
