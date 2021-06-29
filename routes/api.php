@@ -23,6 +23,7 @@ Route::get('/categories', 'App\\Http\\Controllers\\Api\\CategoryApiController@ca
 Route::get('/tables/{identify}', 'App\\Http\\Controllers\\Api\\TablesApiController@show');
 Route::get('/tables', 'App\\Http\\Controllers\\Api\\TablesApiController@tablesByTenant');
 
+Route::get('/products/{flag}', 'App\\Http\\Controllers\\Api\\ProductApiController@show');
 Route::get('/products', 'App\\Http\\Controllers\\Api\\ProductApiController@productsByTenant');
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

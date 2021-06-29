@@ -9,20 +9,24 @@ use App\Repositories\Contracts\{
 
 class ProductService
 {
-    protected $productService, $tenantRepository;
+    protected $productRepository, $tenantRepository;
 
-    public function __construct(ProductRepositoryInterface $productService, TenantRepositoryInterface $tenantRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, TenantRepositoryInterface $tenantRepository)
     {
-        $this->productService = $productService;
+        $this->productRepository = $productRepository;
         $this->tenantRepository = $tenantRepository;
     }
 
     public function getProductsByTenantId(string $id, array $categories)
     {
-        
         $tenant = $this->tenantRepository->getTenantById($id);
 
-        return $this->productService->getProductsByTenantId($tenant->id, $categories);
+        return $this->productRepository->getProductsByTenantId($tenant->id, $categories);
+    }
+
+    public function getProductByFlag(string $flag)
+    {
+        return $this->productRepository->getProductByFlag($flag);
     }
 
 }
