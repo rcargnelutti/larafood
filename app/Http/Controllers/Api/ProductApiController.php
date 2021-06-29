@@ -14,7 +14,7 @@ class ProductApiController extends Controller
 
     public function __construct(ProductService $productService)
     {
-        $this->$productService = $productService;
+        $this->productService = $productService;
     }
 
     public function productsByTenant(TenantFormRequest $request)
