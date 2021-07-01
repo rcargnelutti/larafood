@@ -4,7 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     PlanController
 };
+use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
+
+Route::get('teste', function(){
+    $client = Client::First();
+
+    $token = $client->createToken('token-teste');
+
+    dd($token->plainTextToken);
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
 
