@@ -10,6 +10,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function() {
     Route::get('/me', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@me');
+    Route::post('/logout', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@logout');
 });
 
 Route::group([
