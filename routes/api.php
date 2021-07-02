@@ -2,6 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\AuthClientController;
+
+Route::post('/sanctum/token', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@auth');
+
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function() {
+    Route::get('/me', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@me');
+});
 
 Route::group([
     'prefix' => 'v1',
@@ -20,6 +29,8 @@ Route::group([
     Route::get('/products', 'ProductApiController@productsByTenant');
 
     Route::post('/client', 'Auth\\RegisterController@store');
+
+
  });
 
  //EXEMPLO PARA ATUALIZAÇÃO DA API
