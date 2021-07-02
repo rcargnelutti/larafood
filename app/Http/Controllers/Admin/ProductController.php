@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -56,8 +57,8 @@ class ProductController extends Controller
         if($request->hasFile('image') && $request->image->isValid()){
             $data['image'] = $request->image->store("tenants/{$tenant->id}/products");
         }
-
         $this->repository->create($data);
+
         return redirect()->route('products.index');
     }
 

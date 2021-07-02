@@ -4,15 +4,19 @@ namespace App\Providers;
 
 use App\Models\{
     Category,
+    Client,
     Plan,
     Product,
+    Table,
     Tenant,
 };
 use App\Observers\{
     CategoryObserver,
+    ClientObserver,
     TenantObservers,
     PlanObserver,
     ProductObserver,
+    TableObserver,
 };
 use App\Repositories\Contracts\TenantRepositoryInterface;
 use App\Repositories\TenantRepository;
@@ -46,5 +50,7 @@ class AppServiceProvider extends ServiceProvider
         Category::observe(CategoryObserver::class);
         Product::observe(ProductObserver::class);
         Paginator::useBootstrap();
+        Table::observe(TableObserver::class);
+        Client::observe(ClientObserver::class);
     }
 }
