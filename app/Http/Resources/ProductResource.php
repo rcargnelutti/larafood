@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'image' => url("storage/{$this->image}"),
             'price' => $this->price,
             'description' => $this->description,
+            'pivot' => $this->pivot,
         ];
     }
 }
