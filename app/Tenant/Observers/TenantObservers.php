@@ -16,12 +16,14 @@ class TenantObservers
      */
     public function creating(Model $model)
     {
+        //dd($model);
         $managerTenant = app(ManagerTenant::class);
         $identify = $managerTenant->getTenantIdentify();
 
-        if ($identify)
+        if ($identify) {
             $model->tenant_id = $identify;
+            $model->uuid = Str::uuid();
+        }
 
-        $model->uuid = Str::uuid();
     }
 }

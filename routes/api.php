@@ -11,6 +11,8 @@ Route::group([
 ], function() {
     Route::get('/me', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@me');
     Route::post('/logout', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@logout');
+
+    Route::post('/auth/v1/orders', 'App\\Http\\Controllers\\Api\\OrderApiController@store');
 });
 
 Route::group([
@@ -31,8 +33,8 @@ Route::group([
 
     Route::post('/client', 'Auth\\RegisterController@store');
 
-    Route::post('/orders', 'Auth\\OrderApiController@store');
-    Route::get('/orders/{identify}', 'Auth\\OrderApiController@show');
+    //Route::post('/orders', 'OrderApiController@store');
+    Route::get('/orders/{identify}', 'OrderApiController@show');
 
 
  });
