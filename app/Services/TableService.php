@@ -24,9 +24,9 @@ class TableService
         return $this->categoryRepository->getTablesByTenantId2($tenant->id);
     }
 
-    public function getTableByUrl(string $identify)
+    public function getTableByUuid(string $identify)
     {
-        return $this->categoryRepository->getTableByIdentify($identify);
+        return $this->categoryRepository->getTableByUuid($identify);
     }
 
 }
