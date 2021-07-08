@@ -12,6 +12,8 @@ Route::group([
     Route::get('/me', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@me');
     Route::post('/logout', 'App\\Http\\Controllers\\Api\\Auth\\AuthClientController@logout');
 
+    Route::post('/auth/v1/orders/{identify}/evaluations', 'App\\Http\\Controllers\\Api\\EvaluationApiController@store');
+
     Route::get('/auth/v1/my-orders', 'App\\Http\\Controllers\\Api\\OrderApiController@myOrders');
     Route::post('/auth/v1/orders', 'App\\Http\\Controllers\\Api\\OrderApiController@store');
 });
