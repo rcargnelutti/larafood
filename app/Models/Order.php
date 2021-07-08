@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Models\Evaluation;
 use App\Tenant\Traits\TenantTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,11 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('qty', 'price');
+    }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
     }
 
 }
