@@ -25,8 +25,8 @@ class TenantFactory extends Factory
         return [
             'plan_id' => Plan::factory(),
             'cnpj' => uniqid() . date('YmdHis'),
-            'name' => $this->faker->unique()->name,
-            'email' => $this->faker->unique()->safeEmail,
+            'name' => $this->faker->unique()->name(),
+            'email' => $this->faker->unique()->safeEmail(),
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Tenant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,8 +16,13 @@ class TenantTest extends TestCase
      */
     public function testGetAllTenants()
     {
-        $response = $this->get('/api/v1/tenants');
+        //https://laravel.com/docs/8.x/database-testing
+        Tenant::factory()->count(10)->create();
+        //factory(Tenant::class, 10)->create();
 
-        $response->assertStatus(200);
+        $response = $this->getJson('/api/v1/tenants');
+
+        $response->assertStatus(200)
+                    ->assertJsonCount(10, 'data');
     }
 }
