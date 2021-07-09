@@ -2,18 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Plan;
+use App\Models\Order;
 use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class TenantFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tenant::class;
+    protected $model = Order::class;
 
     /**
      * Define the model's default state.
@@ -23,11 +24,10 @@ class TenantFactory extends Factory
     public function definition()
     {
         return [
-            'plan_id' => Plan::factory(),
-            'cnpj' => uniqid() . date('YmdHis'),
-            'name' => $this->faker->unique()->name,
-            'email' => $this->faker->unique()->safeEmail,
+            'tenant_id' => Tenant::factory(),
+            'identify' => uniqid() . Str::random(10),
+            'total' => 80.0,
+            'status' => 'open',
         ];
     }
-
 }

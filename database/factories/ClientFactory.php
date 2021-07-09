@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Plan;
-use App\Models\Tenant;
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TenantFactory extends Factory
+class ClientFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Tenant::class;
+    protected $model = Client::class;
 
     /**
      * Define the model's default state.
@@ -23,11 +22,10 @@ class TenantFactory extends Factory
     public function definition()
     {
         return [
-            'plan_id' => Plan::factory(),
-            'cnpj' => uniqid() . date('YmdHis'),
-            'name' => $this->faker->unique()->name,
+            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ];
     }
-
 }

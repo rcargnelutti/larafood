@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateTable;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 //use Illuminate\Support\Facades\Auth;
 //use Illuminate\Support\Str;
 
@@ -146,5 +148,24 @@ class TableController extends Controller
                             ->latest()
                             ->paginate();
         return view('admin.pages.tables.index', compact('tables', 'filters'));
+    }
+
+    /**
+     * Generate QrCode
+     *
+     * @param  string  $identify
+     * @return \Illuminate\Http\Response
+     */
+    public function qrcode($identify)
+    {
+        if (!$table = $this->repository->where('identify', $identify)->first()){
+            return redirect()->back();
+        }
+
+        $tenant = Auth ::user()->tenant;
+
+        $uri = env('URI_CLIENT') . "/{$tenant->uuid}/{$table->uuid}";
+
+        return view('admin.pages.tables.qrcode', compact('uri'));
     }
 }
