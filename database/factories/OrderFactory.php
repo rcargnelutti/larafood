@@ -24,7 +24,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'tenant_id' => Tenant::factory(),
+            'tenant_id' => Tenant::factory()->create(),
             'identify' => uniqid() . Str::random(10),
             'total' => 80.0,
             'status' => 'open',

@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
-            'tenant_id' => Tenant::factory(),
+            'tenant_id' => Tenant::factory()->create(),
             'name' => $this->faker->unique()->name,
             'description' => $this->faker->sentence,
         ];

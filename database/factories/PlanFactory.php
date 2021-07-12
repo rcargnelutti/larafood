@@ -25,6 +25,7 @@ class PlanFactory extends Factory
             'name' => $this->faker->unique()->word,
             'price' => 89.0,
             'description' => $this->faker->sentence,
+            'url' => $this->faker->unique()->url(),
         ];
     }
 }

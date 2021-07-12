@@ -23,7 +23,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'tenant_id' => Tenant::factory(),
+            'tenant_id' => Tenant::factory()->create(),
             'title' => $this->faker->unique()->name,
             'description' => $this->faker->sentence,
             'image' => 'pizza.png',
