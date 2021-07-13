@@ -22,7 +22,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'description' => $this->description,
             //'qty' => $this->pivot->qty,
-            'order' => $this->pivot,
+            //'order' => $this->pivot,
         ];
     }
 }

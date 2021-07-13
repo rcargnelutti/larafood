@@ -19,7 +19,6 @@ class TenantTest extends TestCase
         //Tenant::truncate();
         //https://laravel.com/docs/8.x/database-testing
         Tenant::factory()->count(10)->create();
-        //factory(Tenant::class, 10)->create();
 
         $response = $this->getJson('/api/v1/tenants');
         //$response->dump();
