@@ -68,7 +68,8 @@
             <!-- /.info-box -->
         </div>
 
-        @auth
+
+        @admin()
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
               <span class="info-box-icon bg-aqua">
@@ -83,7 +84,7 @@
             </div>
             <!-- /.info-box -->
         </div>
-        @endauth
+        @endadmin
 
         @admin()
         <div class="col-md-3 col-sm-6 col-xs-12">
