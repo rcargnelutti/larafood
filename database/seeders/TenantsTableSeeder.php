@@ -21,7 +21,7 @@ class TenantsTableSeeder extends Seeder
         $plan = Plan::first();
 
         $plan->tenants()->create([
-            'cnpj' => '23882706000120',
+            'cnpj' => '23882706000129',
             'name' => 'EspecializaTi',
             'url' => 'especializati',
             'email' => 'carlos@especializati.com.br',

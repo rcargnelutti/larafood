@@ -4,7 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     PlanController
 };
+use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
+
+Route::get('teste', function(){
+    $client = Client::First();
+
+    $token = $client->createToken('token-teste');
+
+    dd($token->plainTextToken);
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
 
@@ -50,6 +59,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     /**
      * Routes Tables
      */
+    Route::get('tables/qrcode', 'App\\Http\\Controllers\\Admin\\TableController@qrcode')->name('tables.qrcode');
     Route::any('tables/search', 'App\\Http\\Controllers\\Admin\\TableController@search')->name('tables.search');
     Route::resource('tables', 'App\\Http\\Controllers\\Admin\\TableController');
 

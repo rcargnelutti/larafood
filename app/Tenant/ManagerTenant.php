@@ -9,12 +9,12 @@ Class ManagerTenant
 {
     public function getTenantIdentify()
     {
-        return Auth::user()->tenant_id;
+        return Auth::check() ? Auth::user()->tenant_id : '';
     }
 
-    public function getTenant(): Tenant
+    public function getTenant()
     {
-        return Auth::user()->tenant; //Retorna o relacionamento de user com tenant
+        return Auth::check() ? Auth::user()->tenant : ''; //Retorna o relacionamento de user com tenant
     }
 
     public function isAdmin(): bool

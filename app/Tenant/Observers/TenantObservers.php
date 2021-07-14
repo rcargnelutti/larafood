@@ -5,7 +5,7 @@ namespace App\Tenant\Observers;
 use App\Tenant\ManagerTenant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 class TenantObservers
 {
     /**
@@ -16,8 +16,14 @@ class TenantObservers
      */
     public function creating(Model $model)
     {
+        //dd($model);
         $managerTenant = app(ManagerTenant::class);
+        $identify = $managerTenant->getTenantIdentify();
 
-        $model->tenant_id = $managerTenant->getTenantIdentify();
+        if ($identify) {
+            $model->tenant_id = $identify;
+            $model->uuid = Str::uuid();
+        }
+
     }
 }
