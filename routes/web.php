@@ -151,7 +151,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     /**
      * Home Dashboard
      */
-    Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
+    //Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
+    Route::get('/', 'App\\Http\\Controllers\\Admin\\DashboardController@home')->name('admin.index');
+
 });
 
 
