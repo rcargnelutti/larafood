@@ -25,6 +25,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
         //dd( Auth::user()->hasPermission('Perm Users'));
     });
 
+    // Orders
+    Route::get('orders', 'App\\Http\\Controllers\\Admin\\OrderController@index')->name('orders.index');
+
     /**
      * Routes Role X User
      */

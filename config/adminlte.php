@@ -280,11 +280,12 @@ return [
             'icon' => 'fas fa-tablet',
             'can'   => 'table',
         ],
-        // [
-        //     'text' => 'Pedidos',
-        //     'url'  => 'admin/orders',
-        //     'icon' => 'fas fa-utensils',
-        // ],
+        [
+            'text' => 'Pedidos',
+            'url'  => 'admin/orders',
+            'icon' => 'fas fa-utensils',
+            //'can'   => '',
+        ],
     ],
 
     /*
