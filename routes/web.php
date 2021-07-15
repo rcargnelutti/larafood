@@ -25,6 +25,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
         //dd( Auth::user()->hasPermission('Perm Users'));
     });
 
+    // Orders
+    Route::get('orders', 'App\\Http\\Controllers\\Admin\\OrderController@index')->name('orders.index');
+
     /**
      * Routes Role X User
      */
@@ -59,7 +62,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     /**
      * Routes Tables
      */
-    Route::get('tables/qrcode', 'App\\Http\\Controllers\\Admin\\TableController@qrcode')->name('tables.qrcode');
+    Route::get('tables/qrcode/{identify}', 'App\\Http\\Controllers\\Admin\\TableController@qrcode')->name('tables.qrcode');
     Route::any('tables/search', 'App\\Http\\Controllers\\Admin\\TableController@search')->name('tables.search');
     Route::resource('tables', 'App\\Http\\Controllers\\Admin\\TableController');
 
@@ -151,7 +154,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     /**
      * Home Dashboard
      */
-    Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
+    //Route::get('/', 'App\\Http\\Controllers\\Admin\\PlanController@index')->name('admin.index');
+    Route::get('/', 'App\\Http\\Controllers\\Admin\\DashboardController@home')->name('admin.index');
+
 });
 
 

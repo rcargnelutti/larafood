@@ -10,7 +10,7 @@ class ProductObserver
     /**
      * Handle the Product "created" event.
      *
-     * @param  \App\Models\Models\Product  $product
+     * @param  \App\Models\Product  $product
      * @return void
      */
     public function creating(Product $product)
@@ -22,7 +22,7 @@ class ProductObserver
     /**
      * Handle the Product "updated" event.
      *
-     * @param  \App\Models\Models\Product  $product
+     * @param  \App\Models\Product  $product
      * @return void
      */
     public function updating(Product $product)

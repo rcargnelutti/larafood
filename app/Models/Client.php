@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Models\Evaluation;
+use App\Models\Evaluation;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;

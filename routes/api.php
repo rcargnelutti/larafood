@@ -39,8 +39,14 @@ Route::group([
     Route::post('/orders', 'OrderApiController@store');
     Route::get('/orders/{identify}', 'OrderApiController@show');
 
-
  });
+
+ /**
+ * Test API
+ */
+Route::get('/', function() {
+    return response()->json(['message' => 'ok']);
+});
 
  //EXEMPLO PARA ATUALIZAÇÃO DA API
  Route::group([

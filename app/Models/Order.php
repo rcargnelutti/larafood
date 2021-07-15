@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Models\Evaluation;
+use App\Models\Evaluation;
 use App\Tenant\Traits\TenantTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +13,18 @@ class Order extends Model
     use TenantTrait;
 
     protected $fillable = ['tenant_id', 'identify', 'client_id', 'table_id', 'total', 'status', 'comment'];
+
+    /**
+     * Options status
+     */
+    public $statusOptions = [
+        'open' => 'Aberto',
+        'done' => 'Completo',
+        'rejected' => 'Rejeitado',
+        'working' => 'Andamento',
+        'canceled' => 'Cancelado',
+        'delivering' => 'Em transito',
+    ];
 
     public function tenant()
     {

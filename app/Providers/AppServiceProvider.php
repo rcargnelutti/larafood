@@ -22,6 +22,8 @@ use App\Repositories\Contracts\TenantRepositoryInterface;
 use App\Repositories\TenantRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,5 +54,11 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         Table::observe(TableObserver::class);
         Client::observe(ClientObserver::class);
+
+        Blade::if('admin', function () {
+            $user = Auth::user();
+
+            return $user->isAdmin();
+        });
     }
 }
